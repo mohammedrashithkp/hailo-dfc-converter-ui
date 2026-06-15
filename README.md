@@ -23,6 +23,12 @@ The backend uses the Hailo Dataflow Compiler (DFC) via a Docker container to par
 ## Prerequisites
 1. **Docker**: You must have [Docker](https://docs.docker.com/engine/install/) installed to run the Hailo compiler.
 2. **Python 3.10+**: For the FastAPI backend.
+3. **Hailo Software**: Due to licensing, you must download the proprietary Hailo wheels yourself. 
+   - Go to the [Hailo Developer Zone](https://hailo.ai/developer-zone/software-downloads/).
+   - Log in or create an account.
+   - Download the **Hailo Dataflow Compiler (DFC)** wheel for Python 3.10 (e.g., `hailo_dataflow_compiler-3.33.1-py3-none-linux_x86_64.whl`).
+   - Download the **HailoRT** wheel for Python 3.10 (e.g., `hailort-4.23.0-cp310-cp310-linux_x86_64.whl`).
+   - Place both of these `.whl` files directly into the root folder of this repository. The `Dockerfile` relies on them to build the compilation environment.
 
 ## Installation & Usage
 
