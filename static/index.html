@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hailo DFC Converter</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>Hailo DFC <span>Converter</span></h1>
+            </div>
+            <p>Compile ONNX models to HEF format for Raspberry Pi 5 AI HAT+</p>
+        </header>
+
+        <main>
+            <div class="card-grid">
+                <!-- Step 1: Model Upload -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="step-badge">1</span>
+                        <h2>Upload Model</h2>
+                    </div>
+                    <div class="drop-zone" id="model-dropzone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        <p>Drag & drop your <strong>.onnx</strong> file</p>
+                        <span class="subtext">or click to browse</span>
+                        <input type="file" id="model-input" accept=".onnx" hidden>
+                    </div>
+                    <div id="model-status" class="status-message"></div>
+                </div>
+
+                <!-- Step 2: Calibration Data -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="step-badge">2</span>
+                        <h2>Calibration Dataset</h2>
+                    </div>
+                    <div class="info-banner">
+                        <strong>Expected Format:</strong> A .zip file containing raw images (.jpg/.png). Folder structure inside the zip does not matter.
+                    </div>
+                    <div class="drop-zone" id="dataset-dropzone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        <p>Drag & drop dataset <strong>.zip</strong></p>
+                        <span class="subtext">or click to browse</span>
+                        <input type="file" id="dataset-input" accept=".zip" hidden>
+                    </div>
+                    <div id="dataset-status" class="status-message"></div>
+                </div>
+            </div>
+
+            <!-- Configuration & Action -->
+            <div class="action-bar card">
+                <div class="settings-group">
+                    <div class="setting">
+                        <label>Hardware Architecture</label>
+                        <select id="hw-arch">
+                            <option value="hailo8" selected>Hailo-8 (26 TOPS)</option>
+                            <option value="hailo8l">Hailo-8L (13 TOPS)</option>
+                        </select>
+                    </div>
+                    <div class="setting">
+                        <label>Input Resolution</label>
+                        <input type="text" id="input-size" value="640x640" placeholder="WxH">
+                    </div>
+                </div>
+                <button id="compile-btn" class="btn-primary" disabled>
+                    Start Compilation
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+            </div>
+
+            <!-- Terminal output -->
+            <div class="terminal-container" id="terminal-container" style="display: none;">
+                <div class="terminal-header">
+                    <div class="traffic-lights">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="terminal-title">Compilation Logs</div>
+                </div>
+                <pre id="terminal-output"></pre>
+            </div>
+
+            <!-- Download Action -->
+            <div id="download-section" class="download-section" style="display: none;">
+                <a href="/download" class="btn-success">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download best.hef
+                </a>
+            </div>
+        </main>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>

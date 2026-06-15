@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Personal model and compilation files
+*.pt
+*.onnx
+*.hef
+*.har
+
+# Datasets
+dataset/
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+compile.log
+
+# System files
+.DS_Store
+Thumbs.db
